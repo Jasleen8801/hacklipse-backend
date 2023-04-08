@@ -26,7 +26,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
 #one user can have multiple devices
 
 class SysInfo(models.Model):
-    name = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    name = models.ForeignKey(CustomUser, on_delete=models.CASCADE) #it is actually the id of user
     kernel_version= models.CharField(max_length=25)
     host_name= models.CharField(max_length=50)
     os_version= models.CharField(max_length=25)

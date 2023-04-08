@@ -11,8 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.contrib.auth.hashers import make_password
 
-from .serializers import RAMSerializer,SysSerializer,ProcessSerializer
-from .models import RAM,SysInfo,Process
+from .serializers import RAMSerializer,SysSerializer,ProcessSerializer,CustomUserSerializer
+from .models import RAM,SysInfo,Process,CustomUser
 # Create your views here.
 
 class HelloView(APIView):
@@ -24,7 +24,24 @@ class HelloView(APIView):
 
         ]
         return Response(routes)
+
+class CustomUserView(APIView):
+    def get(self,request):
+        users = CustomUser.objects.all()
+        serializer = CustomUserSerializer(users,many=True)
+        return Response(serializer.data)
     
+    def post(self,request):
+        serializer = CustomUserSerializer(data=request.data)
+        print(request.data["password"])
+        if serializer.is_valid():
+            password = request.data["password"]
+            password = make_password(password)
+            request.data["password"] = password
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
 class SysView(APIView):
     def get(self,request):
         sys = SysInfo.objects.all()

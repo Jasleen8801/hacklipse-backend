@@ -56,7 +56,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 AUTH_USER_MODEL = 'api.CustomUser' #i am using my own custom user model
-
+ALLOWED_HOSTS = ['hackeclipse.azurewebsites.net','127.0.0.1']
 
 
 TEMPLATES = [
