@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.contrib.auth.hashers import make_password
 
-from .serializers import RAMSerializer,SysSerializer,ProcessSerializer,CustomUserSerializer
+from .serializers import RAMSerializer,SysSerializer,ProcessSerializer,CustomUserSerializer, TPInfoSerializer
 from .models import RAM,SysInfo,Process,CustomUser
 # Create your views here.
 
@@ -81,3 +81,60 @@ class ProcessView(APIView):
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+
+
+"""
+
+data = {
+"sysinfo":{
+    "id": 1,
+    "kernel_version": "12.03",
+    "host_name": "Linux",
+    "os_version": "kinetic",
+    "cpu_count": 12,
+    "cpus": {
+        "key": "value",
+        "key2": "value2"
+    },
+    "temp": {
+        "temp1": "69"
+    },
+    "name": 2
+} ,
+
+"raminfo": {
+sys_id
+used_memory
+total_memory
+used_swap
+total_swap
+},
+
+"prcs": ,
+    
+}
+
+"""
+
+
+class MasterView(APIView):
+    def post(self,request):
+        data = request.data
+
+        sysinfo = data["sysinfo"]
+        raminfo = data["raminfo"]
+
+        prcs = data["prcs"]
+
+        sys_serializer = SysSerializer(data=sysinfo)
+        ram_serializer = RAMSerializer(data=raminfo)
+        prcs_serializer = ProcessSerializer(data=prcs,many=True)
+
+        if sys_serializer.is_valid() and ram_serializer.is_valid() and prcs_serializer.is_valid():
+            sys_serializer.save()
+            ram_serializer.save()
+            prcs_serializer.save()
+            return Response("Data saved successfully",status=status.HTTP_201_CREATED)
+        return Response("Data not saved",status=status.HTTP_400_BAD_REQUEST)
+    

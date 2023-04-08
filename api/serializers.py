@@ -25,3 +25,8 @@ class ProcessSerializer(ModelSerializer):
         model = Process
         fields = "__all__"
         exclude = []
+
+class TPInfoSerializer(ModelSerializer):
+    class Meta:
+        model = SysInfo
+        fields = {"temp"}
