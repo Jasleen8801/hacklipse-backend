@@ -21,6 +21,9 @@ class HelloView(APIView):
         routes = [
         "GET /api -> To get all routes of api" ,
         "GET /api/ram -> To get all details of ram utilization",
+        "GET /api/sys -> To get system information",
+        "GET /api/prcs -> To get all process information",
+        "GET /api/user -> To get all users", 
 
         ]
         return Response(routes)
