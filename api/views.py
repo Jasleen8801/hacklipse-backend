@@ -11,8 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.contrib.auth.hashers import make_password
 
-from .serializers import RAMSerializer
-from .models import RAM
+from .serializers import RAMSerializer,SysSerializer,ProcessSerializer
+from .models import RAM,SysInfo,Process
 # Create your views here.
 
 class HelloView(APIView):
@@ -25,8 +25,21 @@ class HelloView(APIView):
         ]
         return Response(routes)
     
+class SysView(APIView):
+    def get(self,request):
+        sys = SysInfo.objects.all()
+        serializer = SysSerializer(sys,many=True)
+        return Response(serializer.data)
+
+
 class RAMView(APIView):
     def get(self,request):
         ram = RAM.objects.all()
         serializer = RAMSerializer(ram,many=True)
+        return Response(serializer.data)
+
+class ProcessView(APIView):
+    def get(self,request):
+        process = Process.objects.all()
+        serializer = ProcessSerializer(process,many=True)
         return Response(serializer.data)
