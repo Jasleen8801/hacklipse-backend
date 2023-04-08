@@ -95,10 +95,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres', 
-        'USER': 'postgres', 
+        'NAME': 'qhxhdome', 
+        'USER': 'qhxhdome', 
         'PASSWORD': os.environ.get('DB_PASS'),
-        'HOST': 'localhost', 
+        'HOST': 'surus.db.elephantsql.com', 
         'PORT': '5432',
     }
 }
