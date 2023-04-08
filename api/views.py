@@ -31,6 +31,13 @@ class SysView(APIView):
         serializer = SysSerializer(sys,many=True)
         return Response(serializer.data)
 
+    def post(self,request):
+        serializer = SysSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
 
 class RAMView(APIView):
     def get(self,request):
@@ -38,8 +45,22 @@ class RAMView(APIView):
         serializer = RAMSerializer(ram,many=True)
         return Response(serializer.data)
 
+    def post(self,request):
+        serializer = RAMSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
 class ProcessView(APIView):
     def get(self,request):
         process = Process.objects.all()
         serializer = ProcessSerializer(process,many=True)
         return Response(serializer.data)
+    
+    def post(self,request):
+        serializer = ProcessSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
