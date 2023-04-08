@@ -4,3 +4,5 @@ djangorestframework-jwt
 djangorestframework-simplejwt
 jsonfield
 python-dotenv
+psycopg2
+psycopg
