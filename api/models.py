@@ -24,7 +24,6 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
        return str(self.email)
 
 #one user can have multiple devices
-
 class SysInfo(models.Model):
     # name = models.ForeignKey(CustomUser, on_delete=models.CASCADE) #it is actually the id of user
     kernel_version= models.CharField(max_length=25)
@@ -32,21 +31,22 @@ class SysInfo(models.Model):
     name = models.CharField(max_length=20,default="ubuntu")
     os_version= models.CharField(max_length=25)
     cpu_count = models.PositiveIntegerField(blank=True)
-    cpus = models.JSONField(blank=True,null=True)
-    temp = models.JSONField(blank=True,null=True)
+    cpus = models.JSONField(default=None, blank=True, null=True)
+    temp = models.JSONField(default=None, blank=True, null=True)
 
 class RAM(models.Model):
-    sys_id = models.ForeignKey(SysInfo, on_delete = models.CASCADE,default=69)
     used_memory = models.PositiveIntegerField(default=69)
     total_memory = models.PositiveIntegerField(default=69)
     used_swap = models.PositiveIntegerField(default=69)
-    total_swap =models.PositiveIntegerField(default=69) 
+    total_swap =models.PositiveIntegerField(default=69)
 
-    def __str__(self):
+    def _str_(self):
         return str(self.sys_id)
     
 class Process(models.Model):
-    sys_id = models.ForeignKey(SysInfo, on_delete = models.CASCADE,default=69)
-    process_name = models.CharField(max_length=69)
-    disk_usage = models.CharField(max_length=69)
-
+    pid = models.CharField(max_length=69)
+    name = models.CharField(max_length=69)
+    written_bytes = models.PositiveIntegerField(default=0)
+    total_written_bytes = models.PositiveIntegerField(default=0)
+    read_bytes = models.PositiveIntegerField(default=0)
+    total_read_bytes = models.PositiveIntegerField(default=0)
