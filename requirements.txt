@@ -6,3 +6,4 @@ jsonfield
 python-dotenv
 psycopg2
 psycopg
+django-cors-headers 
