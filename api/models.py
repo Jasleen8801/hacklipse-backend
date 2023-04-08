@@ -29,6 +29,7 @@ class SysInfo(models.Model):
     # name = models.ForeignKey(CustomUser, on_delete=models.CASCADE) #it is actually the id of user
     kernel_version= models.CharField(max_length=25)
     host_name= models.CharField(max_length=50)
+    name = models.CharField(max_length=20,default="ubuntu")
     os_version= models.CharField(max_length=25)
     cpu_count = models.PositiveIntegerField()
     cpus = models.JSONField()
