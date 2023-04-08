@@ -32,8 +32,8 @@ class SysInfo(models.Model):
     name = models.CharField(max_length=20,default="ubuntu")
     os_version= models.CharField(max_length=25)
     cpu_count = models.PositiveIntegerField(blank=True)
-    cpus = models.JSONField(blank=True)
-    temp = models.JSONField(blank=True)
+    cpus = models.JSONField(blank=True,null=True)
+    temp = models.JSONField(blank=True,null=True)
 
 class RAM(models.Model):
     sys_id = models.ForeignKey(SysInfo, on_delete = models.CASCADE,default=69)
