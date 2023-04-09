@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-_mj@&&b-4ibl3ufta&2i2!n%1tj4l93tml98k@royk#h7=h#*7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost:8000",'https://hackeclipse.azurewebsites.net',"localhost"]
+ALLOWED_HOSTS = ["localhost:8000",'https://hackeclipse.azurewebsites.net',"localhost", '*']
 
 
 # Application definition
