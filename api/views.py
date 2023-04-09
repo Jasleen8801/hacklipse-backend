@@ -50,6 +50,18 @@ class SysView(APIView):
         sys = SysInfo.objects.all()
         serializer = SysSerializer(sys,many=True)
         return Response(serializer.data)
+    
+    def update(self,request, pk):
+        data = request.data
+        sys = SysInfo.objects.get(sys_id = pk)
+        serializer = SysSerializer(
+        instance=sys, data=data
+    )
+        if serializer.is_valid():
+            serializer.save()
+
+        return Response(serializer.data)
+
 
     def post(self,request):
         serializer = SysSerializer(data=request.data)

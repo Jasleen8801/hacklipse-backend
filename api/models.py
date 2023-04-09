@@ -11,8 +11,6 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
     email=models.EmailField(max_length=200,unique=True)
     password=models.CharField(max_length=200)
 
-    mac_id = models.PositiveIntegerField(primary_key = True,default=0)
-
     is_staff = models.BooleanField(default=False, verbose_name='Staff account is activated')
     is_active = models.BooleanField(default=True, verbose_name='account is activated')
     is_admin = models.BooleanField(default=False, verbose_name='staff account')
@@ -27,7 +25,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
 
 #one user can have multiple devices
 class SysInfo(models.Model):
-    sys_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE,default=0) #it is actually the id of user
+    mac_id = models.PositiveIntegerField(primary_key = True,default=0) #it is actually the id of user
     kernel_version= models.CharField(max_length=25)
     host_name= models.CharField(max_length=50)
     name = models.CharField(max_length=20,default="ubuntu")
